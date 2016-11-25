@@ -7,6 +7,65 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <Button Name="WaitButton"
+                Margin="15"
+                Content="Wait"
+                Grid.Row="0"
+                Grid.Column="0"
+                Click="WaitButton_OnClick"></Button>
+
+        <Button Name="AwaitButton"
+                Margin="15"
+                Content="Await"
+                Grid.Row="1"
+                Grid.Column="0"
+                Click="AwaitButton_OnClick"></Button>
+
+        <Label Name="StateLabel"
+               Margin="15"
+               Foreground="Green"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               FontSize="16"
+               Grid.Column="1"
+               Grid.Row="0"></Label>
+
+        <Ellipse Name="Rectangle"
+                   Width="20"
+                   Height="60"
+                   Fill="Blue"
+                   Margin="5"
+                   VerticalAlignment="Center"
+                   Grid.Row="1"
+                   Grid.Column="1">
+            <Ellipse.RenderTransform>
+                <RotateTransform Angle="0"
+                                 CenterX="10"
+                                 CenterY="10"/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Rectangle"
+                                             Storyboard.TargetProperty="(TextBlock.RenderTransform).(RotateTransform.Angle)"
+                                             From="0"
+                                             To="360"
+                                             Duration="0:0:5"
+                                             RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Ellipse.Triggers>
+        </Ellipse>
     </Grid>
 </Window>
